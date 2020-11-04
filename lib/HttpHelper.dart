@@ -19,14 +19,13 @@ class HttpHelper {
     http.Response resp = await http.get(uri);
 
     // validate response
-    if(resp.statusCode == 200) { // OK
+    if(resp.statusCode == HttpStatus.ok) {
       final decodedJsonMap = json.decode(resp.body);
+
       Movies movieList = new Movies.fromjsonList(decodedJsonMap['results']);
       return movieList.movies;
-      
     } else {
       return null;
     }
   }
-
 }

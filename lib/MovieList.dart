@@ -12,16 +12,17 @@ class MovieList extends StatelessWidget {
       child: FutureBuilder(
         future: movieHelper.getPopularMovies(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData != null) {
+          print(snapshot.data);
+          if(snapshot.hasData == true) {
             List<Movie> movies = snapshot.data;
             return ListView.builder(
-              itemCount: snapshot.data.length,
+              itemCount: movies.length,
               itemBuilder: (BuildContext context, int index) {
-                new ListTile(
-                  title: Text(movies[index].title),
+                return ListTile(
+                  title: Text('${movies[index].title}'),
                 );
               },
-              );
+            );
           } 
           else {
             return Center(child: CircularProgressIndicator());
